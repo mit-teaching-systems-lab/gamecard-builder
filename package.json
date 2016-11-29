@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.7.0",
+    "lodash": "^4.17.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "yaml-loader": "^0.4.0"

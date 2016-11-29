@@ -1,28 +1,12 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
+.files {
   padding: 20px;
-  color: white;
+  background: #333;
+  margin-bottom: 20px;
 }
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 
 .yaml-textarea {
   margin-top: 20px;
@@ -36,16 +20,16 @@
   page-break-inside: avoid; 
 }
 
-
 .text-card {
   display: inline-block;
   vertical-align: top;
   border: 1px dashed #eee;
   padding: 0.25in;
   width: 3in;
-  height: 2.3075in;
+  height: 2.307in;
   font-size: 0.3in;
   page-break-inside: avoid;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width:8.5in) { /* resize your window until the event is triggered */

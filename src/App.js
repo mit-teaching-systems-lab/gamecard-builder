@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import yaml from 'js-yaml';
+import _ from 'lodash';
 
+const files = [
+  '/cards/ethics-a.yaml',
+  '/cards/ethics-b.yaml',
+  '/cards/committee-of-n.yaml'
+];
 class App extends Component {
   constructor() {
     super()
@@ -12,9 +17,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(process.env.PUBLIC_URL + '/cards/ethics.yaml')
+    this.fetchYaml(files[0]);
+  }
+
+  fetchYaml(yamlFile) {
+    fetch(`${process.env.PUBLIC_URL}${yamlFile}`)
       .then((response) => response.text())
       .then((yamlText) => this.setState({ yamlText }));
+  }
+
+  onFileClicked(file) {
+    this.fetchYaml(file);
   }
 
   onTextChanged(e) {
@@ -24,9 +37,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="no-print">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+        <div className="files no-print">
+          <div>
+            {files.map((file) => {
+              return <button key={file} onClick={this.onFileClicked.bind(this, file)}>{file}</button>;
+            })}
           </div>
           <textarea
             className="yaml-textarea"
@@ -40,26 +55,49 @@ class App extends Component {
   }
 
   renderColumns() {
-    const data = yaml.safeLoad(this.state.yamlText, 'utf8');
-    if (!data) return null;
+    var data = {};
+    try {
+      data = yaml.safeLoad(this.state.yamlText, 'utf8');
+      if (!data) return null;
+    } catch (e) {
+      console.warn(e);
+    }
 
+    const colors = [
+      '#ff9999',
+      '#99ff99',
+      '#9999ff',
+      '#999999'
+    ];
     return (
       <div className="container">
-        <div className="container">{this.renderTextCards(data.principles, { backgroundColor: '#ff9999' })}</div>
-        <div className="container">{this.renderTextCards(data.settings, { backgroundColor: '#9999ff' })}</div>
+        {Object.keys(data).map((key, index) => {
+          return <div key={key} className="container">{this.renderPlainCards(data[key], { backgroundColor: colors[index] })}</div>;
+        })}
       </div>
     );
   }
 
-  renderTextCards(textCards, style) {
-    if (!textCards || textCards.length === 0) return null;
+  renderPlainCards(plainCards, style) {
+    if (!plainCards || plainCards.length === 0) return null;
 
     return (
-      <div className="container">{textCards.map((text) => {
+      <div className="container">{plainCards.map((card) => {
+        const text = _.isString(card)
+          ? card
+          : this.cardText(card);
         return <div key={text} style={style} className="text-card">{text}</div>
       })}
       </div>
     );
+  }
+
+  cardText(card) {
+    return JSON.stringify(card)
+      .replace(/\"/g, '')
+      .replace(/:/g, ': ')
+      .replace(/[\{\}]/g, '')
+      .replace(/,/g, '\n');
   }
 }
 
