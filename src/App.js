@@ -55,10 +55,10 @@ class App extends Component {
   }
 
   renderColumns() {
-    var data = {};
+    var json = {};
     try {
-      data = yaml.safeLoad(this.state.yamlText, 'utf8');
-      if (!data) return null;
+      json = yaml.safeLoad(this.state.yamlText, 'utf8');
+      if (!json) return null;
     } catch (e) {
       console.warn(e);
     }
@@ -69,32 +69,48 @@ class App extends Component {
       '#9999ff',
       '#999999'
     ];
+
+    const cards = _.flatten(Object.keys(json).map((type, index) => {
+      return json[type].map((data) => {
+        return { type, data, color: colors[index] };
+      });
+    }));
+
+    // 9 items per page
+    // console.log({cards});
+    // const nullCard = {
+    //   type: 'null',
+    //   data: '',
+    //   color: 'white'
+    // };
+    // const doubleSidedCards = _.flatten(_.chunk(cards, 9).map((pageCards) => {
+    //   const fullRowCards = _.chunk(pageCards, 3).map((rowCards) => {
+    //     const regularCards = rowCards.map((card) => {
+    //       return {...card, type: 'r-' + card.type};
+    //     });
+    //     return regularCards.concat(Array(3 - regularCards.length).fill(nullCard));
+    //   });
+    //   const reversedRowCards = _.flatten(fullRowCards.reverse(), true);
+    //   return pageCards.concat(reversedRowCards);
+    // }), true);
+    // console.log({doubleSidedCards});
+
     return (
       <div className="container">
-        {Object.keys(data).map((key, index) => {
-          return <div key={key} className="container">{this.renderPlainCards(data[key], { backgroundColor: colors[index] })}</div>;
+        {cards.map(({type, data, color}) => {
+          const text = _.isString(data)
+            ? data
+            : this.cardText(data);
+          const key = (text === '') ? _.uniqueId() : text;
+          return <div key={key} style={{ backgroundColor: color }} className="text-card">{text}</div>
         })}
       </div>
     );
   }
 
-  renderPlainCards(plainCards, style) {
-    if (!plainCards || plainCards.length === 0) return null;
-
-    return (
-      <div className="container">{plainCards.map((card) => {
-        const text = _.isString(card)
-          ? card
-          : this.cardText(card);
-        return <div key={text} style={style} className="text-card">{text}</div>
-      })}
-      </div>
-    );
-  }
-
-  cardText(card) {
-    return JSON.stringify(card)
-      .replace(/\"/g, '')
+  cardText(data) {
+    return JSON.stringify(data)
+      .replace(/"/g, '')
       .replace(/:/g, ': ')
       .replace(/[\{\}]/g, '')
       .replace(/,/g, '\n');
