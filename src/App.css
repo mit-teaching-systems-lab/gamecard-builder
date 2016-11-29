@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+.yaml-textarea {
+  margin-top: 20px;
+  width: 600px;
+  height: 200px;
+}
+
+.container {
+  display: inline-block;
+  text-align: left;
+  page-break-inside: avoid; 
+}
+
+
+.text-card {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px dashed #eee;
+  padding: 0.25in;
+  width: 3in;
+  height: 2.3075in;
+  font-size: 0.3in;
+  page-break-inside: avoid;
+}
+
+@media screen and (max-width:8.5in) { /* resize your window until the event is triggered */
+  html { width: 8.5in; }
+  body { font: 9pt/1.5 Arial, sans-serif; } /* Roughly 12px font */
+}
+
+.printable {
+  margin-left: 0.21in;
+  margin-right: 0.21in;
+}
+
+@media print {
+  .no-print { display: none; }
+}
