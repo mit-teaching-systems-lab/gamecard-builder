@@ -6,7 +6,8 @@ import _ from 'lodash';
 const files = [
   '/cards/ethics-a.yaml',
   '/cards/ethics-b.yaml',
-  '/cards/committee-of-n.yaml'
+  '/cards/committee-of-n.yaml',
+  '/cards/bias-boggle.yaml'
 ];
 class App extends Component {
   constructor() {
@@ -67,7 +68,10 @@ class App extends Component {
       '#ff9999',
       '#99ff99',
       '#9999ff',
-      '#999999'
+      '#999999',
+      '#99ffff',
+      '#ffff99',
+      '#ff99ff'
     ];
 
     const cards = _.flatten(Object.keys(json).map((type, index) => {
