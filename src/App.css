@@ -14,23 +14,6 @@
   height: 200px;
 }
 
-.container {
-  display: inline-block;
-  text-align: left;
-  page-break-inside: avoid; 
-}
-
-.text-card {
-  display: inline-block;
-  vertical-align: top;
-  border: 1px dashed #eee;
-  padding: 0.25in;
-  width: 3in;
-  height: 2.307in;
-  font-size: 0.3in;
-  page-break-inside: avoid;
-  white-space: pre-wrap;
-}
 
 @media screen and (max-width:8.5in) { /* resize your window until the event is triggered */
   html { width: 8.5in; }

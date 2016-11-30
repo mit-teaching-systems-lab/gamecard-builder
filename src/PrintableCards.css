@@ -1,0 +1,17 @@
+.PrintableCards-container {
+  display: inline-block;
+  text-align: left;
+  page-break-inside: avoid; 
+}
+
+.PrintableCards-card {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px dashed #eee;
+  padding: 0.25in;
+  width: 3in;
+  height: 2.307in;
+  font-size: 0.3in;
+  page-break-inside: avoid;
+  white-space: pre-wrap;
+}
