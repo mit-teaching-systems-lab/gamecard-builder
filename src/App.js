@@ -10,7 +10,8 @@ const files = [
   '/cards/ethics-a.yaml',
   '/cards/ethics-b.yaml',
   '/cards/committee-of-n.yaml',
-  '/cards/bias-boggle.yaml'
+  '/cards/bias-boggle.yaml',
+  '/cards/bias-behaviors.yaml'
 ];
 class App extends Component {
   constructor() {
