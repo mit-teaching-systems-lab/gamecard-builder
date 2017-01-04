@@ -21,8 +21,8 @@
 }
 
 .printable {
-  margin-left: 0.21in;
-  margin-right: 0.21in;
+  margin-left: 0.1in;
+  margin-right: 0.1in;
 }
 
 @media print {
