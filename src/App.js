@@ -14,7 +14,8 @@ const files = [
   '/cards/bias-behaviors.yaml',
   '/cards/strs.yaml',
   '/cards/student-behavior-classes.yaml',
-  '/cards/gender-statements.yaml'
+  '/cards/gender-statements.yaml',
+  '/cards/management-choices.yaml'
 ];
 class App extends Component {
   constructor() {
