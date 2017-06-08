@@ -15,7 +15,8 @@ const files = [
   '/cards/strs.yaml',
   '/cards/student-behavior-classes.yaml',
   '/cards/gender-statements.yaml',
-  '/cards/management-choices.yaml'
+  '/cards/management-choices.yaml',
+  '/cards/ap-seminar.yaml'
 ];
 class App extends Component {
   constructor() {
